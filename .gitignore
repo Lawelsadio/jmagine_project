@@ -1,0 +1,17 @@
+Thumbs.db
+.DS_Store
+.gradle
+build/
+out/
+.idea
+*.iml
+*.ipr
+*.iws
+.project
+.settings
+.classpath
+.jruby-container
+.sass-cache
+#For don't import our own images files
+grails-app/assets/images/img*
+node_modules

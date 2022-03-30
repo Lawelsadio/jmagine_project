@@ -1,0 +1,41 @@
+grails:
+  google_maps_api_key: AIzaSyBYmHX5K2oKjw21DRwJp8LfL1ioTnDlIX8
+  assetspath:
+    #    local path for image storage
+    #    path: C:/MAMP/htdocs/jmagine/
+    #path: /var/www/htdocs/jmagine
+    #path: /Applications/MAMP/htdocs/jmagine
+#    path: C:/Users/gregg/IdeaProjects/jmagine-backend-mamac-no-s3/grails-app/assets/images/
+    # path: C:/Users/gregg/IdeaProjects/jmagine-backend-mamac/grails-app/assets/images/
+    path: /Applications/MAMP/htdocs/jmagine-backend-mamac-no-s3/grails-app/assets/images
+
+    #path: /Users/user/Dropbox/Mon Mac (Sadio.local)/Documents/mes projets/mamac/jmagine-backend-mamac-no-s3/grails-app/assets/images
+    #    external entry point to access the same directory as above from a web pov
+    url: http://localhost:8889/assets/
+  serverUrl: http://localhost:8889
+
+#dataSource:
+  driverClassName: com.mysql.cj.jdbc.Driver
+  #driverClassName: org.h2.Driver
+  username: root
+  password: 'root'
+  #username: sa
+  #password: ''
+
+#dataSource:
+  #pooled: true
+  #jmxExport: true
+  #driverClassName: com.mysql.cj.jdbc.Driver
+  #driverClassName: org.postgresql.Driver
+  #username: root
+ # password: root
+
+environments:
+  development:
+    dbCreate: create-drop
+    #url: jdbc:postgresql://localhost:5432/devDbSadio
+    url: "jdbc:mysql://localhost/devDbSadio?useUnicode=yes&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+    #url: jdbc:h2:mem:devDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+
+server:
+  port: 8889

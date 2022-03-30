@@ -1,0 +1,35 @@
+grails:
+  google_maps_api_key: AIzaSyBYmHX5K2oKjw21DRwJp8LfL1ioTnDlIX8
+#  don't forget to increase the default max size for upload with the web server
+  assetspath:
+
+    #    local path for image storage
+   # path: /var/www/htdocs/jmagine
+    #    external entry point to access the same directory as above from a web pov
+   # url: http://assets.jmagine.com/
+  #serverUrl: http://jmagine.com/
+    path: /Users/user/Dropbox/Mon Mac (Sadio.local)/Documents/mes projets/mamac/jmagine-backend-mamac-no-s3/grails-app/assets/images
+    #    external entry point to access the same directory as above from a web pov
+    url: http://localhost:8889/assets/
+  serverUrl: http://localhost:8889
+
+
+dataSource:
+  driverClassName: com.mysql.cj.jdbc.Driver
+  username: root
+  password: 'root'
+  # username: sa
+  # password: ''
+
+environments:
+  production:
+    dataSource:
+      #    database launching mode, after tests, database should be emptied and this parameter must be set to "update"
+      dbCreate: create-drop
+      #url: jdbc:mysql://localhost/jmagine
+      url: "jdbc:mysql://localhost/jmagine?useUnicode=yes&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+
+
+server:
+  #  this is changing the deployment port by default
+  port: 8089

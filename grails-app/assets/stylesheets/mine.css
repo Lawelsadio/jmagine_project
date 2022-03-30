@@ -1,0 +1,17 @@
+.wawa {
+    width: 65px;
+    height: 65px;
+}
+
+.cell-action {
+    display: inline-flex;
+}
+.cell-action i {
+    margin-top: 8px;
+}
+.select-role {
+    margin-left: 10px;
+}
+.td-self{
+    vertical-align: inherit !important;
+}
