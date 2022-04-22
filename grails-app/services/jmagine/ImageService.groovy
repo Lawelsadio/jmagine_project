@@ -1,16 +1,9 @@
 package jmagine
-
 import grails.gorm.transactions.Transactional
 import org.springframework.web.multipart.MultipartFile
-
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
 import java.awt.Graphics2D;
-
-import org.imgscalr.Scalr;
-
-import java.io.File;
-import java.io.IOException;
 
 @Transactional
 class ImageService {
@@ -19,70 +12,18 @@ class ImageService {
     int w = 770;
 
     FileContainer createImage(params  ) {
-
-        // getWidthAndHeight(params.picture)
-
-
-
-
         def dimension = getImageDimension(params.picture)
         if( dimension ) {
-
-            println("params.picture")
-            println(params.picture)
             InputStream inputStream = params.picture.getInputStream();
-            println("inputStream")
-            println(inputStream)
             BufferedImage imagetest = ImageIO.read(inputStream);
-            println("imagetest")
-            println(imagetest)
             BufferedImage imgg = new BufferedImage(w, h, imagetest.getType());
-
             Graphics2D g = imgg.createGraphics();
             g.drawImage(imagetest, 0, 0, w, h, null);
             g.dispose();
-            /*
-
-            BufferedImage image = Scalr.resize(
-                    imagetest,
-                    Scalr.Method.BALANCED,
-                    Scalr.Mode.FIT_TO_WIDTH,
-                    maxWidth,
-                    maxHeight,
-                    Scalr.OP_ANTIALIAS);
-
-             */
-
-            // File resizedFile = new File("/Applications/MAMP/htdocs/jmagine-backend-mamac-no-s3/grails-app/assets/images/logo-60.jpg");
-
-
-            //def dim = getImageDimension(imgg)
-            // println("dim")
-            //println(dim)
-
-            //String ext = FilenameUtils.getExtension( params.picture.getOriginalFilename() );
             String ext = 'jpg'
             def tmpFile = File.createTempFile( 'img', '.'+ext, new File(grailsApplication.config.grails.assetspath.path) )
-
-            println("tmpFile avant transfert to")
-            println(tmpFile)
-
             ImageIO.write(imgg, "jpg", tmpFile);
-
-            //originalImage.flush();
-            // imgg.flush();
-            println("imgg")
-            println(imgg)
-            //params.picture.transferTo( tmpFile )
-            println("tmpFile apres")
-            println(tmpFile)
             def img = new FileContainer( filename:tmpFile.getName(), ownerId:params.ownerId, ownerType:params.ownerType, type:params.fileType?params.fileType:FileType.IMG )
-            // BufferedImage originalImage = ImageIO.read(params.picture);
-            // BufferedImage resizedImage = Scalr.resize(originalImage, 200);
-            // File resizedFile = new File(tmpFile);
-            // ImageIO.write(resizedImage, "jpg", resizedFile);
-            //resizeImages(params.picture,tmpFile,200)
-
             resizeImage(img,
                     dimension,
                     params.sizing_informations?.width?params.sizing_informations.width:100,
@@ -96,69 +37,9 @@ class ImageService {
         }
     }
 
-    def resizeImages( File file, String targetFilePath, int targetSize) {
-        try {
-            //File sourceFile = new File(originalFilePath);
-            BufferedImage originalImage = ImageIO.read(file);
-
-            BufferedImage resizedImage = Scalr.resize(originalImage, targetSize);
-
-            File resizedFile = new File(targetFilePath);
-            ImageIO.write(resizedImage, "jpg", resizedFile);
-
-            originalImage.flush();
-            resizedImage.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    def getWidthAndHeight(MultipartFile file){
-        String ext = 'jpg'
-        def tmpFile = File.createTempFile( 'img', '.'+ext, new File(grailsApplication.config.grails.assetspath.path) )
-        //println("params.picture")
-        // println(params.picture)
-
-        file.transferTo( tmpFile )
-        println("tmpFile")
-        println(tmpFile)
-        try {
-            InputStream inputStream = file.getInputStream();
-            println("inputStream")
-            println(inputStream)
-            BufferedImage imagetest = ImageIO.read(inputStream);
-            println("imagetest")
-            println(imagetest)
-            BufferedImage image = Scalr.resize(imagetest, targetSize);
-            println("image")
-            println(image)
-            // File resizedFile = new File(tmpFile);
-            // ImageIO.write(image, "jpg", resizedFile);
-            println("image2")
-            println(image)
-            //println("resizedFile")
-            //println(resizedFile)
-
-            if (null == image){
-                return "ERROR";
-            }
-            int width = image.getWidth();
-            int height = image.getHeight();
-            println("width")
-            println(width)
-            println("height")
-            println(height)
-            return "?width="+width+"&height="+height;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     Thumbnail createThumbnail(params ) {
         def dimension = getImageDimension( params.picture )
         if( dimension ) {
-            //String ext = FilenameUtils.getExtension(params.picture.getOriginalFilename());
             String ext = 'jpg'
             println("apres l extension" + grailsApplication.config.grails.assetspath.path)
             def tmpFile = File.createTempFile('img', '.' + ext, new File(grailsApplication.config.grails.assetspath.path))
@@ -193,13 +74,6 @@ class ImageService {
         String mime = picture.getContentType()
         if(( mime == 'image/png' )||( mime == 'image/jpeg' )||( mime == 'image/gif' )||( mime == 'image/pjpeg' )||( mime == 'image/x-png' )) return true
         else return false
-    }
-
-    def deleteImage(FileContainer image ) {
-        def file = new File(grailsApplication.config.grails.assetspath.path + image.filename )
-        if( file && image.filename ) {
-            file.delete()
-        }
     }
 
     def deleteImage(Thumbnail image ) {

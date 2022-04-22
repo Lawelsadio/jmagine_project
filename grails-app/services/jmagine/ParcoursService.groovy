@@ -9,8 +9,6 @@ class ParcoursService {
     def rightsService
     def grailsApplication
 
-
-
     Parcours createParcours(params) {
         FileContainer background
         Parcours new_parcours = new Parcours(
@@ -124,7 +122,6 @@ class ParcoursService {
                 }else {
                                                 println("le fichier n existe pas")
                 }
-              //  imageService.deleteImage(fileContainer)
                 parcours.removeFromFileList(fileContainer)
             }
 

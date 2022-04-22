@@ -1,20 +1,11 @@
-// See src/main/resources/config for external config files
-
-// Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'jmagine.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'jmagine.UserRole'
 grails.plugin.springsecurity.authority.className = 'jmagine.Role'
 grails.plugin.springsecurity.auth.loginFormUrl = '/auth'
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = "/auth?login_error=1"
 grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
-
-//grails.plugin.springsecurity.rest.token.storage.useGorm = true
-//grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName = 'security.AuthenticationToken'
 grails.plugin.springsecurity.rest.token.storage.jwt.useEncryptedJwt = true
 grails.plugin.springsecurity.rest.token.storage.jwt.secret
-
-
-
 grails.plugin.springsecurity.interceptUrlMap = [
 
 		[pattern: '/',               				access: ['ROLE_ADMIN', 'ROLE_OP', 'ROLE_MOD']],
@@ -28,6 +19,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
 
 		[pattern: '/my_account/**', 				access: ['ROLE_ADMIN', 'ROLE_OP', 'ROLE_MOD']],
 		//[pattern: '/users/**', 						access: ['ROLE_ADMIN', 'ROLE_OP']],
+		[pattern: '/users/do_add',			access: ['permitAll']],
 		[pattern: '/users',							access: ['ROLE_ADMIN', 'ROLE_OP']],
 		[pattern: '/users/signup',							access: ['permitAll']],
 		[pattern: '/users/add',  					access: ['ROLE_ADMIN', 'ROLE_OP']],
@@ -50,7 +42,7 @@ grails.plugin.springsecurity.interceptUrlMap = [
 		[pattern: '/users/signup',					access: ['permitAll']],
 		[pattern: '/users/do_add',					access: ['permitAll']],
 		[pattern: '/static/api/**',					access: ['permitAll']],
-		[pattern: '/api/doc/**',					access: ['permitAll']],
+		[pattern: '/api/doc',					access: ['permitAll']],
 		[pattern: '/api/parcours/**',access: ['ROLE_ADMIN']],
 ]
 
@@ -80,22 +72,7 @@ ckeditor {
 	defaultFileBrowser = "ofm"
 	config = "/ck/ckconfig.gsp"
 	upload {
-
 		basedir = "/uploads/img"
-//        baseurl = "http://jmagine.tokidev.fr/uploads/wsw/"
-//        baseurl = "http://localhost/test/"
-//        basedir = "/var/www/jmagine/uploads/wsw/"
-//        basedir = "F:/Programmes/EasyPHP-13.1VC11/data/localweb/"
-//        overwrite = false
-//        link {
-//            browser = true
-//            upload = false
-//            allowed = []
-//            denied = ['html', 'htm', 'php', 'php2', 'php3', 'php4', 'php5',
-//                      'phtml', 'pwml', 'inc', 'asp', 'aspx', 'ascx', 'jsp',
-//                      'cfm', 'cfc', 'pl', 'bat', 'exe', 'com', 'dll', 'vbs', 'js', 'reg',
-//                      'cgi', 'htaccess', 'asis', 'sh', 'shtml', 'shtm', 'phtm']
-//        }
 		image {
 			browser = true
 //            upload = true

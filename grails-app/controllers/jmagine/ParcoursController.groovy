@@ -145,8 +145,6 @@ class ParcoursController {
         render(view: '/parcours/add', model: [me: me])
     }
 
-
-
     // Protégé par Config.groovy: ROLE_ADMIN/ROLE_OP
     @ApiDoc(operation = {
         summary "Creer un parcours "
@@ -196,12 +194,6 @@ class ParcoursController {
 
         try {
             file = request.getFile("background_pic")
-            // a regarder absolument String path = request.getSession().getServletContext().getRealPath("").concat("/uploadFile");
-            // println("path")
-            //  println(path)
-            //  println("path2")
-            // println(path2)
-
 
             def test2 = file.
                     println("test2")
@@ -225,7 +217,6 @@ class ParcoursController {
             redirect(controller: 'parcours', action: 'add')
         }
     }
-
 
 
     // Protégé par Config.groovy: ROLE_ADMIN/ROLE_OP/ROLE_MOD
@@ -498,6 +489,7 @@ class ParcoursController {
         def ret = [:]
         ret.id = parcours.id
         ret.title = parcours.title
+        ret.backgroundPic = grailsApplication.config.grails.assetspath.url + parcours.backgroundPic.filename
         ret.pois = []
         ret.sections = []
         log.debug("$p_id")
@@ -505,8 +497,8 @@ class ParcoursController {
         parcours.components.each {
             ContentComponent content ->
                 def retComponent = [:]
-                retComponent.backgroundPic = grailsApplication.config.grails.assetspath.url + content.backgroundPic.filename
                 retComponent.title = content.title
+                retComponent.backgroundPic = grailsApplication.config.grails.assetspath.url + content.backgroundPic.filename
                 retComponent.shortDesc = content.shortDesc
                 retComponent.content = content.content
                 ret.sections.add(retComponent)
