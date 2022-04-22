@@ -8,7 +8,7 @@ const { width } = Dimensions.get('window');
 import MapView,{Marker} from "react-native-maps";
 
 const Map = ({ navigation }) => {
-  const KEY = "AIzaSyDvavutEhhZnUrcC30WUD4N47GfAJGqBlE";
+  const KEY = "your apikey here";
 
   const animation = useRef(new Animated.Value(0)).current;
 const signupColorInterpolate = animation.interpolate({

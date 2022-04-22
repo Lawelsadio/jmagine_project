@@ -13,7 +13,7 @@ import FormContainer from './FormContainer';
 const Parcours = ({ navigation }) => {
 const [duration, setDuration] = useState('');
 const [distance, setdistance] = useState('');
-  const KEY = "AIzaSyDvavutEhhZnUrcC30WUD4N47GfAJGqBlE";
+  const KEY = "your apikey here";
 
 const {fullparcour,p,setLocation} = useLogin();
 console.log("je cherche le parcours dans poi",fullparcour)
